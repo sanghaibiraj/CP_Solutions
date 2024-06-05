@@ -1,61 +1,54 @@
-problem link: https://codeforces.com/contest/1795/problem/A
+problem link: https://codeforces.com/contest/1807/problem/C
+Problem tags: greedy, implementation, strings
+difficulty: *800
 
 Solution:
 
 /* <________--BIRAJ01--________> */
- 
+
 #include <bits/stdc++.h>
 #include <iostream>
- 
+
 #define lil long long int
- 
+
 #define couty cout << "YES" << endl
 #define coutn cout << "NO" << endl
 #define cout(a) cout << a << endl
- 
+
 #define swap(a,b); { a=a+b; b=a-b; a=a-b; }
- 
+
 #define max(a,b) (a>b)?a:b
 #define min(a,b) (a<b)?a:b
 #define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
 #define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
- 
+
 #define fi(i,s,e) for(int i=s;i<e;i++)
 #define fd(i,s,e) for(int i=s;i>e;i--)
- 
+
 #define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
 #define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << endl; }
- 
+
 using namespace std;
- 
+
 int main() {
-	int t;
-	cin >> t;
-	while(t--){
-	    int n,m,c=0;
-        cin >> n >> m;
-        char a[n];
-        char b[m];
-        ain(i,a,n);
-        ain(i,b,m);
+    int t;
+    cin >> t;
+    while(t--){
+        int n, x=0;
+        cin >> n;
+        char s[n];
+        ain(i,s,n);
         fi(i,0,n-1){
-            if(a[i]==a[i+1])
-            c++;
+            for(int j=i+1;j<n;j=j+2){
+                if(s[i]==s[j]){
+                    x=1;
+                    break;
+                }
+            }
         }
-        fi(i,0,m-1){
-            if(b[i]==b[i+1])
-            c++;
-        }
-        if(c>1)
+        if(x==1)
         coutn;
-        else if(c==0)
+        else
         couty;
-        else{
-            if(a[n-1]==b[m-1])
-            coutn;
-            else
-            couty;
-        }
-	}
-	return 0;
+    }
 }
