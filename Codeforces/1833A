@@ -1,8 +1,12 @@
-problem link: https://codeforces.com/contest/1833/problem/C
-Problem tags: greedy, math
-difficulty: *800
+// problem link: https://codeforces.com/contest/1833/problem/A
+// Problem Name: A. Musical Puzzle
+// Contest Name: Codeforces round 874
+// div: 3
 
-Solution:
+// Problem tags: implementation, strings
+// difficulty: *800
+
+// Solution:
 
 /* <________--BIRAJ01--________> */
 
@@ -22,7 +26,7 @@ Solution:
 #define fd(i,s,e) for(int i=s;i>e;i--)
 
 #define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
-#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << " "; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
 
 using namespace std;
 
@@ -35,24 +39,19 @@ int main() {
 	int t;
 	cin >> t;
 	while(t--){
-        int n,x=0;
+        int n;
         cin >> n;
-        int a[n];
+        char a[n];
         ain(i,a,n);
-        sort(a,a+n);
-        if(a[0]%2!=0)
-        couty;
-        else{
-            fi(i,0,n){
-                if(a[i]%2!=0){
-                    x=1;
+        int cnt = n-1,c=0;
+        fi(i,0,n-1){
+            fi(j,i+1,n-1){
+                if(a[i]==a[j]&&a[i+1]==a[j+1]){
+                    cnt--;
                     break;
                 }
             }
-            if(x==1)
-            coutn;
-            else
-            couty;
         }
+        cout(cnt);
     }
 }

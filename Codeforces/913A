@@ -1,8 +1,11 @@
-problem link: https://codeforces.com/contest/762/problem/A
-Problem tags: math, number theory
-difficulty: *1400
+// problem link: https://codeforces.com/contest/913/problem/A
+// problem name: A. Modular Exponentiation
+// Contest name: Hello 2018
 
-Solution:
+// Problem tags: implementation, math
+// difficulty: *900
+
+// Solution:
 
 /* <________--BIRAJ01--________> */
 
@@ -27,29 +30,23 @@ Solution:
 #define mod 1000000007
 using namespace std;
 
+lil power(lil a, lil b){
+	lil res =1;
+	while(b>0){
+		if(b%2==1)
+			res = ((res%mod) * (a%mod))%mod;
+		a = ((a%mod)*(a%mod))%mod;
+		b /= 2;
+	}
+	return res%mod;
+}
+
 int main(){
-    lil n,k;
-    cin >> n >> k;
-    lil cnt=0,c=0;
-    lil x=-1;
-    for(lil i=1;i*i<=n;i++){
-        if(n%i==0){
-            c += 2;
-            if(i==n/i)
-            c--;
-        }
-    }
-    for(lil i=1;i*i<=n;i++){
-        if(n%i==0)
-        cnt++;
-        if(cnt==k){
-            x=i;
-            break;
-        }
-        else if(c-cnt+1==k){
-            x=n/i;
-            break;
-        }
-    }
-    cout(x);
+    lil n,m;
+    cin >> n >> m;
+    if(n>26)
+    cout(m);
+    else
+    cout(m % power(2,n));
+
 }

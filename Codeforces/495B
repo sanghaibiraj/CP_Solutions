@@ -1,8 +1,12 @@
-problem link: https://codeforces.com/contest/913/problem/A
-Problem tags: implementation, math
-difficulty: *900
+// problem link: https://codeforces.com/contest/495/problem/B
+// Problem Name: Modular Equations
+// Contest Name: Codeforces Round 282
+// Div: 2
 
-Solution:
+// Problem tags: math, number theory
+// difficulty: *1600
+
+// Solution:
 
 /* <________--BIRAJ01--________> */
 
@@ -39,11 +43,24 @@ lil power(lil a, lil b){
 }
 
 int main(){
-    lil n,m;
-    cin >> n >> m;
-    if(n>26)
-    cout(m);
-    else
-    cout(m % power(2,n));
-
+    int a,b;
+    cin>> a >> b;
+    int x = a-b;
+    if(a==b)
+        cout("infinity");
+    else if(x<=b)
+        cout(0);
+    else{
+        int c=2;
+        int cnt=0;
+        for(int i=1;i*i<=x;i++){
+            if(x%i==0){
+                if(i>b)
+                cnt++;
+                if(i!=x/i && x/i>b)
+                cnt++;
+            }
+        }
+        cout(cnt);
+    }
 }
