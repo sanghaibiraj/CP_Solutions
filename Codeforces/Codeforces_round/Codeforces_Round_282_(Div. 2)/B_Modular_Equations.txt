@@ -1,0 +1,62 @@
+problem link: https://codeforces.com/contest/495/problem/B
+Problem tags: math, number theory
+difficulty: *1600
+
+Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+#define mod 1000000007
+using namespace std;
+
+lil power(lil a, lil b){
+	lil res =1;
+	while(b>0){
+		if(b%2==1)
+			res = ((res%mod) * (a%mod))%mod;
+		a = ((a%mod)*(a%mod))%mod;
+		b /= 2;
+	}
+	return res%mod;
+}
+
+int main(){
+    int a,b;
+    cin>> a >> b;
+    int x = a-b;
+    if(a==b)
+        cout("infinity");
+    else if(x<=b)
+        cout(0);
+    else{
+        int c=2;
+        int cnt=0;
+        for(int i=1;i*i<=x;i++){
+            if(x%i==0){
+                if(i>b)
+                cnt++;
+                if(i!=x/i && x/i>b)
+                cnt++;
+            }
+        }
+        cout(cnt);
+    }
+}
