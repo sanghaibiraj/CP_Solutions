@@ -1,0 +1,60 @@
+
+// problem link: https://codeforces.com/contest/230/problem/B
+// Problem Name: B. T-primes
+// Contest Name: Codeforces Round 142
+// Div: 2
+
+// Problem tags: math, number theory, binary search, implementation
+// difficulty: *1300
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+#define mod 1000000007
+using namespace std;
+
+bool isPrime(lil n){
+    if(n<2)
+        return false;
+    if(n<=3)
+        return true;
+    if(n%2==0 || n%3==0)
+        return false;
+    for(int i=5;i*i<=n;i+=6)
+        if(n%i==0 || n%(i+2)==0)
+            return false;
+    return true;
+}
+
+int main(){
+    int t;
+    cin >> t;
+    while(t--){
+        lil n,i;
+        cin >> n;
+        i = sqrt(n);
+        if(i*i==n and isPrime(i))
+        couty;
+        else
+        coutn;
+    }
+}
