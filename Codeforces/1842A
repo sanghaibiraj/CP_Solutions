@@ -1,0 +1,59 @@
+// problem link: https://codeforces.com/contest/1842/problem/A
+// Problem Name: A. Tenzing and Tsondu
+// Contest Name: CodeTON Round 5
+// Div: 1 + 2
+
+// Problem tags: games, math
+// difficulty: *800
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n,m, sum1=0, sum2=0, x;
+    cin >> n >> m;
+    int a[n], b[m];
+    fi(i,0,n){
+        cin >> x;
+        sum1 += x;
+    }
+    fi(i,0,m){
+        cin >> x;
+        sum2 += x;
+    }
+    if(sum1>sum2) cout("Tsondu");
+    else if(sum2>sum1) cout("Tenzing");
+    else cout("Draw");
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
