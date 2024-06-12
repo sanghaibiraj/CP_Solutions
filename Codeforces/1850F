@@ -1,0 +1,62 @@
+// problem link: https://codeforces.com/contest/1850/problem/F
+// Problem Name: F. We Were Both Children
+// Contest Name: Codeforces Round 886
+// Div: 4
+
+// Problem tags: brute force, implementation, math, number theory
+// difficulty: *1300
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n,m=0,c=1;
+    cin >> n;
+    lil a[n];
+    lil count[n+1]={0};
+    ain(i,a,n);
+    sort(a,a+n);
+    fi(i,0,n-1){
+        if(a[i]>n) break;
+        if(a[i]==a[i+1]) c++;
+        else{
+            for(int j=a[i];j<n+1;j+=a[i]) count[j] += c;
+            c=1;
+        }
+    }
+    if(c>0) for(int j=a[n-1];j<n+1;j+=a[n-1]) count[j] += c;
+    fi(i,1,n+1) m = max(m,count[i]);
+    cout(m);
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
