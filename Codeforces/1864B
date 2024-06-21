@@ -1,0 +1,76 @@
+// problem link: https://codeforces.com/contest/1864/problem/B
+// Problem Name: B. Swap and Reverse
+// Contest Name: Harbour.Space Scholarship Contest 2023-2024
+//  (Div. 1 + Div. 2)
+
+// Problem tags: constructive algorithms, greedy, sortings, strings
+// difficulty: *1100
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    int n,k;
+    cin >> n >> k;
+    if(k%2==0){
+        char str[n];
+        ain(i,str,n);
+        sort(str,str+n);
+        fi(i,0,n) cout << str[i];
+        cout << endl;
+    }
+    else{
+        if(n%2==0){
+            char str1[n/2];
+            char str2[n/2];
+            fi(i,0,n/2) cin >> str1[i] >> str2[i];
+            sort(str1,str1+n/2);
+            sort(str2,str2+n/2);
+            fi(i,0,n/2) cout << str1[i] << str2[i];
+            cout << endl;
+        }
+        else{
+            char str1[n/2+1];
+            char str2[n/2];
+            fi(i,0,n/2) cin >> str1[i] >> str2[i];
+            cin >> str1[n/2];
+            sort(str1,str1+n/2+1);
+            sort(str2,str2+n/2);
+            fi(i,0,n/2) cout << str1[i] << str2[i];
+            cout << str1[n/2];
+            cout << endl;
+        }
+    }  
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}

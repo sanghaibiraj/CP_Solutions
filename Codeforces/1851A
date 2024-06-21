@@ -1,0 +1,56 @@
+// problem link: https://codeforces.com/contest/1851/problem/A
+// Problem Name: A. Escalator Conversations
+// Contest Name: Codeforces Round 888
+// Div: 3
+
+// Problem tags: brute force, constructive algorithms, math
+// difficulty: *800
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n,m,k,h,c=0;
+    cin >> n >> m >> k >> h;
+    lil a[n];
+    ain(i,a,n);
+    fi(i,0,n){
+        if(a[i]==h) continue;
+        if(abs(h-a[i])%k==0){
+            if(abs(h-a[i])/k<m) c++;
+        }
+    }
+    cout(c);
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
