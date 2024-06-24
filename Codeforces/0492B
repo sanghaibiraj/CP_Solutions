@@ -1,0 +1,56 @@
+// problem link: https://codeforces.com/contest/492/problem/B
+// Problem Name: B. Vanya and Lanterns
+// Contest Name: Codeforces Round 280
+// Div: 2
+
+// Problem tags: binary search, implementation, math, sortings
+// difficulty: *1200
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n,l;
+    double mx=0;
+    cin >> n >> l;
+    double a[n];
+    ain(i,a,n);
+    sort(a,a+n);
+    fi(i,1,n){
+        mx = max(mx,a[i]-a[i-1]);
+    }
+    mx = max3(a[0],l-a[n-1],mx/2.0);
+    cout<<fixed<<setprecision(10)<<mx<<endl;
+}
+int main() {
+        int t;
+        t=1;
+        while(t--){
+            solve();
+        }
+}

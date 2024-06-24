@@ -1,0 +1,59 @@
+// problem link: https://codeforces.com/contest/160/problem/A
+// Problem Name: A. Twins
+// Contest Name: Codeforces Round 111
+// Div: 2
+
+// Problem tags: greedy, sortings
+// difficulty: *900
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    int n,sum=0,sum2=0,c=0;
+    cin >> n;
+    int a[n];
+    ain(i,a,n);
+    fi(i,0,n){
+        sum += a[i];
+    }   
+    sort(a,a+n);
+    fd(i,n-1,-1){
+        sum2 += a[i];
+        c++;
+        if(2*sum2>sum){cout(c); return;}
+    }
+    cout(c);
+}
+int main() {
+        int t;
+        t=1;
+        while(t--){
+            solve();
+        }
+}

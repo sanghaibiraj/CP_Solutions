@@ -1,0 +1,66 @@
+// problem link: https://codeforces.com/contest/1859/problem/B
+// Problem Name: B. Olya and Game with Arrays
+// Contest Name: Codeforces Round 892
+// Div: 2
+
+// Problem tags: constructive algorithms, greedy, math, sortings
+// difficulty: *1000
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n,m,x,ans=0;
+    cin >> n;
+    vector<lil> v, v1, v2;
+    fi(i,0,n){
+        cin >> m;
+        fi(j,0,m){
+            cin >> x;
+            v.push_back(x);
+        }
+        sort(v.begin(),v.end());
+        v1.push_back(v[0]);
+        v2.push_back(v[1]);
+        v.clear();
+    }
+    sort(v1.begin(),v1.end());
+    sort(v2.begin(),v2.end());
+    fi(i,0,n){
+        if(i==0) ans += v1[0];
+        else ans += v2[i];
+    }
+    cout(ans);
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
