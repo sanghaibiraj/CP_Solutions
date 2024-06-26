@@ -1,0 +1,59 @@
+// problem link: https://codeforces.com/contest/1879/problem/B
+// Problem Name: B. Chips on the Board
+// Contest Name: Educational Codeforces Round 155
+// Div. 2
+
+// Problem tags: constructive algorithms, greedy
+// difficulty: *900
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n;
+    cin >> n;
+    lil a[n], b[n];
+    ain(i,a,n);
+    ain(i,b,n);
+    lil suma=0, sumb=0, mina = 10e9+1, minb=10e9+1;
+    fi(i,0,n){
+        suma+=a[i];
+        sumb+=b[i];
+        mina=min(mina,a[i]);
+        minb=min(minb,b[i]);
+    }
+    lil x = min(mina*n+sumb,minb*n+suma);
+    cout(x);
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
