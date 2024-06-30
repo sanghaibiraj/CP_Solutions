@@ -1,0 +1,65 @@
+// problem link: https://codeforces.com/contest/1891/problem/B
+// Problem Name: B. Deja Vu
+// Contest Name: Codeforces Round 907
+// Div. 2
+
+// Problem tags: brute force, math, sortings
+// difficulty: *1100
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n,q,m=1e9+10;
+    cin >> n >> q;
+    lil a[n];
+    lil x[q];
+    ain(i,a,n);
+    ain(i,x,q);
+    fi(j,0,q){
+        if(j>0 && x[j]>=m) continue;
+        fi(i,0,n){
+            if(a[i]%2==1) continue;
+            if(a[i]%(lil)(1<<x[j])==0){
+                //couty;
+                a[i] += (lil)(1<<(x[j]-1));
+                // break;
+            }
+        }
+        m = min(m,x[j]);
+    }
+    fi(i,0,n) cout << a[i] << " ";
+    cout << "\n";
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}

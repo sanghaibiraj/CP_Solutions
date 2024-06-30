@@ -1,0 +1,73 @@
+// problem link: https://codeforces.com/contest/1890/problem/B
+// Problem Name: B. Qingshan Loves Strings
+// Contest Name: Codeforces Round 906
+// Div. 2
+
+// Problem tags: constructive algorithms, implementation
+// difficulty: *800
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    int n,m;
+    cin >> n >> m;
+    string s,t;
+    cin >> s >> t;
+    bool t_check = true;
+    fi(i,1,m){
+        if(t[i]==t[i-1]){
+            t_check=false;
+            break;
+        }
+    }
+    if(t[0]!=t[m-1]) t_check=false;
+    if(t_check){
+        fi(i,1,n){
+            if(s[i]==s[i-1] && s[i]==t[0]){coutn; return;}
+        }
+        couty;
+        return;
+    }
+    else{
+        fi(i,1,n){
+            if(s[i]==s[i-1]){
+                coutn;
+                return;
+            }
+        }
+        couty;
+    }
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
