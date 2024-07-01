@@ -1,0 +1,57 @@
+// problem link: https://codeforces.com/contest/474/problem/B
+// Problem Name: B. Worms
+// Contest Name: Codeforces Round 271
+// Div: 2
+
+// Problem tags: binary search, implementation
+// difficulty: *1200
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    int n,m;
+    cin >> n;
+    int a[n];
+    ain(i,a,n);
+    cin >> m;
+    int b[m];
+    ain(i,b,m);
+    fi(i,1,n) a[i] += a[i-1];
+    fi(i,0,m){
+        auto lb = lower_bound(a,a+n,b[i]);
+        cout(lb-a+1);
+    }
+}
+int main() {
+        int t;
+        t=1;
+        while(t--){
+            solve();
+        }
+}
