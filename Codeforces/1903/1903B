@@ -1,0 +1,74 @@
+// problem link: https://codeforces.com/contest/1903/problem/B
+// Problem Name: B. StORage room
+// Contest Name: Codeforces Round 912
+// Div. 2
+
+// Problem tags: bitmasks, brute force, constructive algorithms, greedy
+// difficulty: *1200
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    int n;
+    bool flag = true;
+    cin >> n;
+    lil a[n];
+    lil m[n][n];
+    fi(i,0,n) a[i] = (1<<30)-1;
+    fi(i,0,n){
+        fi(j,0,n){
+            cin >> m[i][j];
+            if(i!=j){
+                a[i] &= m[i][j];
+                a[j] &= m[i][j];    
+            }
+
+        }
+    }
+        // fi(i,0,n) cout << a[i] << " ";
+    fi(i,0,n){
+        fi(j,i+1,n){
+            if((a[i]|a[j]) != m[i][j]){flag=false; break;}
+        }
+        if(flag==false) break;
+    }
+    if(flag){
+        couty;
+        fi(i,0,n) cout << a[i] << " ";
+        cout << endl;
+    }
+    else coutn;
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}

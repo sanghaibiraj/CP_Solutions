@@ -1,0 +1,88 @@
+// problem link: https://codeforces.com/contest/1905/problem/C
+// Problem Name: C. Largest Subsequence
+// Contest Name: Codeforces Round 915
+// Div. 2
+
+// Problem tags: greedy, strings
+// difficulty: *1400
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    int n;
+    string str, s= "", omit="";
+    cin >> n >> str;
+    char ch = str[n-1];
+    omit += ch;
+    fd(i,n-2,-1){
+        if(str[i]<ch){
+            s += str[i];
+        }
+        else{
+            ch = str[i];
+            omit+=ch;
+        }
+    }
+    string snew = "";
+    reverse(s.begin(),s.end());
+    int j=0,k=0;
+    fi(i,0,n){
+        if(j<s.length() && s[j]==str[i]){
+            snew += str[i];
+            j++;
+        }
+        else{
+            snew += omit[k];
+            k++;
+        }
+    }
+    bool flag=true;
+    fi(i,1,n){
+        if(snew[i]<snew[i-1]){flag=false; break;}
+    }
+    if(flag){
+        int c=0, len=omit.length();
+        // cout(omit);
+        fd(i,len-2,-1){
+            // cout << omit[i] << " " << omit[len-1] << endl;
+            if(omit[i]==omit[len-1]){c++;}
+            else break;
+        }
+        // cout(c);
+        cout(len-1-c);
+    }
+    else cout(-1);
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
