@@ -1,0 +1,81 @@
+// problem link: https://codeforces.com/contest/1914/problem/E1
+// Problem Name: E1. Game with Marbles (Easy Version)
+// Contest Name: Codeforces Round 916
+// Div. 3
+
+// Problem tags: brute force, games, greedy, sortings
+// difficulty: *1400
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+bool sortbysecdesc(const pair<lil,lil> &a, const pair<lil,lil> &b){
+       return a.second>b.second;
+}
+
+void solve(){
+    int n,c=0,cnt=0,sum=0,mx=0,index=0;
+    cin >> n;
+    lil a[n], b[n];
+    ain(i,a,n);
+    ain(i,b,n);
+    while(true){
+        c++;
+        cnt=0;
+        mx=0;
+        index=-1;
+        fi(i,0,n){
+            if(a[i]==0 || b[i]==0){cnt++; continue;}
+            sum = a[i] + b[i];
+            if(sum>mx){
+                mx=sum;
+                index=i;
+            }
+        }
+        if(cnt==n) break;
+        if(c&1){
+            a[index]--;
+            b[index]=0;
+        }
+        else{
+            a[index]=0;
+            b[index]--;
+        }
+    }
+    lil ans=0;
+    fi(i,0,n){ ans += a[i]-b[i];}
+    cout(ans);
+    
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}

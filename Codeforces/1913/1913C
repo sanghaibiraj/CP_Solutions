@@ -1,0 +1,65 @@
+// problem link: https://codeforces.com/contest/1913/problem/C
+// Problem Name: C. Game with Multiset
+// Contest Name: Educational Codeforces Round 160
+// Div. 2
+
+// Problem tags: binary search, bitmasks, brute force, greedy
+// difficulty: *1300
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    int q;
+    cin >> q;
+    int arr[33] = {0};
+    while(q--){
+        int t,v;
+        bool flag = true;
+        cin >> t >> v;
+        if(t==1) arr[v]++;
+        else{
+            int c=0;
+            fd(i,30,-1){
+                if((v>>i)&1) c++;
+                if(arr[i]>=c){c=0; continue;}
+                c-=arr[i];
+                c*=2;
+            }
+            if(c) coutn;
+            else couty;
+        }
+    }
+}
+int main() {
+        int t;
+        t=1;
+        while(t--){
+            solve();
+        }
+}

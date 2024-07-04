@@ -1,0 +1,75 @@
+// problem link: https://codeforces.com/contest/1914/problem/D
+// Problem Name: D. Three Activities
+// Contest Name: Codeforces Round 916
+// Div. 3
+
+// Problem tags: brute force, dp, greedy, implementation, sortings
+// difficulty: *1200
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n,mx=0,m,sum=0;
+    cin >> n;
+    vector<pair<lil,lil>> a;
+    vector<pair<lil,lil>> b;
+    vector<pair<lil,lil>> c;
+    fi(i,0,n){cin >> m; a.push_back({m,i});}
+    fi(i,0,n){cin >> m; b.push_back({m,i});}
+    fi(i,0,n){cin >> m; c.push_back({m,i});}
+    sort(a.begin(),a.end());
+    sort(b.begin(),b.end());
+    sort(c.begin(),c.end());
+
+    pair<lil,lil> p = a[n-1];
+    pair<lil,lil> q = b[n-1];
+    pair<lil,lil> r = c[n-1];
+
+    fi(i,1,4){
+        p = a[n-i];
+        fi(j,1,4){
+            q=b[n-j];
+            if(q.second==p.second) continue;
+            fi(k,1,4){
+                r = c[n-k];
+                if(r.second==p.second || r.second==q.second) continue;
+                sum = p.first+q.first+r.first;
+                mx = max(mx,sum);
+            }
+        }
+    }
+    cout(mx);
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
