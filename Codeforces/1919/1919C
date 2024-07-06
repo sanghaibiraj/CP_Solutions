@@ -1,0 +1,68 @@
+// problem link: https://codeforces.com/contest/1919/problem/C
+// Problem Name: C. Grouping Increases
+// Contest Name: Hello 2024
+
+// Problem tags: data structures, dp, greedy
+// difficulty: *1400
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    int n, c=0;
+    cin >> n;
+    int arr[n];
+    ain(i,arr,n);
+    vector<int> a, b;
+    a.push_back(arr[0]);
+    b.push_back(INT_MAX);
+    fi(i,1,n){
+        if(a.back()<b.back()){
+            if(arr[i]<=a.back()) a.push_back(arr[i]);
+            else if(arr[i]<=b.back()) b.push_back(arr[i]);
+            else a.push_back(arr[i]);
+        }
+        else{
+            if(arr[i]<=b.back()) b.push_back(arr[i]);
+            else if(arr[i]<=a.back()) a.push_back(arr[i]);
+            else b.push_back(arr[i]);
+        }
+    }
+    int s = a.size();
+    fi(i,0,s-1) if(a[i]<a[i+1]) c++;
+    s = b.size();
+    fi(i,0,s-1) if(b[i]<b[i+1]) c++;
+    cout(c);
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
