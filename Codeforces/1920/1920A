@@ -1,0 +1,59 @@
+// problem link: https://codeforces.com/contest/1920/problem/A
+// Problem Name: A. Satisfying Constraints
+// Contest Name: Codeforces Round 919 
+// Div: 2
+
+// Problem tags: brute force, greedy, math
+// difficulty: *800
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n, mx=0, mn=1e9+1;
+    cin >> n;
+    vector<lil> v;
+    fi(i,0,n){
+        lil a,b;
+        cin >> a >> b;
+        if(a==3) v.push_back(b);
+        else if(a==1) mx = max(mx,b);
+        else mn = min(mn,b);
+    }
+    lil c = mn - mx +1;
+    fi(i,0,v.size()) if(v[i]<=mn && v[i]>=mx) c--;
+    if(c<0) c=0;
+    cout(c);
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}

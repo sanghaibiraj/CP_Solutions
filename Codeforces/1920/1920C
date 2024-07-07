@@ -1,0 +1,59 @@
+// problem link: https://codeforces.com/contest/1920/problem/C
+// Problem Name: C. Partitioning the Array
+// Contest Name: Codeforces Round 919 
+// Div: 2
+
+// Problem tags: brute force, math, number theory
+// difficulty: *1600
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    int n,ans=0;
+    cin >> n;
+    int a[n];
+    ain(i,a,n);
+    fi(i,1,n+1){
+        if(n%i==0){
+            int g=0;
+            fi(j,0,n-i){
+                g = __gcd(g,abs(a[j]-a[j+i]));
+            }
+            if(g>1 || g==0) ans++;
+        }
+    }
+    cout(ans);
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
