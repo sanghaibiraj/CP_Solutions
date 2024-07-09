@@ -1,0 +1,114 @@
+// problem link: https://codeforces.com/contest/1676/problem/D
+// Problem name: D. X-Sum
+// Contest Name: Codeforces Round 790
+// Div. 4
+
+// Problem tags: brute force, greedy, implementation
+// difficulty: *1000
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    int n,m;
+    cin >> n >> m;
+    lil a[n][m];
+    fi(i,0,n){
+        fi(j,0,m) cin >> a[i][j];
+    }
+    lil b[n][m] = {0};
+    lil sum=0;
+    fi(i,0,n){
+        int x=i, y=0;
+        while(x>=0 && y<m){
+            sum += a[x][y];
+            x--; y++;
+        }
+        x=i, y=0;
+        while(x>=0 && y<m){
+            b[x][y] = sum;
+            x--; y++;
+        }
+        sum=0;
+    }
+    fi(i,1,m){
+        int x=n-1, y=i;
+        while(y<m && x>=0){
+            sum += a[x][y];
+            x--; y++;
+        }
+        x=n-1, y=i;
+        while(y<m && x>=0){
+            b[x][y] = sum;
+            x--; y++;
+        }
+        sum=0;
+    }
+    fd(i,n-1,-1){
+        int x=i,y=0;
+        while(x<n && y<m){
+            sum+=a[x][y];
+            x++; y++;
+        }
+        x=i,y=0;
+        while(x<n && y<m){
+            b[x][y] += sum - a[x][y];
+            x++; y++;
+        }
+        sum=0;
+    }
+    fi(i,1,m){
+        int x=0,y=i;
+        while(y<m && x<n){
+            sum+=a[x][y];
+            x++; y++;
+        }
+        x=0,y=i;
+        while(y<m && x<n){
+            b[x][y] += sum - a[x][y];
+            x++; y++;
+        }
+        sum=0;
+    }
+    lil ans=0;
+    // fi(i,0,n){
+    //     fi(j,0,m) cout << b[i][j] << " ";
+    //     cout << endl;
+    // }
+    fi(i,0,n){
+        fi(j,0,m) ans = max(ans,b[i][j]);
+    }
+    cout(ans);
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}

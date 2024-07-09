@@ -1,0 +1,74 @@
+// problem link: https://codeforces.com/contest/1922/problem/C
+// Problem Name: C. Closest Cities
+// Contest Name: Educational Codeforces Round 161
+// Div: 2
+
+// Problem tags: greedy, implementation, math
+// difficulty: *1300
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    int n;
+    cin >> n;
+    lil a[n];
+    ain(i,a,n);
+    lil p[n], s[n];
+    p[0]=0, p[1] = 1, s[n-1]=0, s[n-2]=1;
+    fi(i,1,n-1){
+        if(a[i+1]-a[i]>a[i]-a[i-1]) p[i+1] = a[i+1]-a[i];
+        else p[i+1]=1;
+    }
+    fi(i,2,n) p[i] += p[i-1]; 
+    fd(i,n-2,0){
+        if(a[i+1]-a[i]>a[i]-a[i-1]) s[i-1] = 1;
+        else s[i-1] = a[i]-a[i-1];
+    }
+    fd(i,n-2,-1) s[i]+= s[i+1];
+    int q;
+    cin >> q;
+    while(q--){
+        int x,y;
+        cin >> x >> y;
+        if(x==y){cout(0); return;}
+        if(x>y){
+            cout(s[y-1]-s[x-1]);
+        }
+        else{
+            cout(p[y-1]-p[x-1]);
+        }
+    }
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
