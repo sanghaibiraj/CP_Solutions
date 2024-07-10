@@ -1,0 +1,71 @@
+// problem link: https://codeforces.com/contest/1927/problem/C
+// Problem Name: C. Choose the Different Ones!
+// Contest Name: Codeforces Round 923
+// Div: 3
+
+// Problem tags: brute force, greedy, math
+// difficulty: *1000
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    int n,m,k,ca=0,cb=0;
+    cin >> n >> m >> k;
+    int a[n];
+    int b[m];
+    ain(i,a,n);
+    ain(i,b,m);
+    set<int> s;
+    set<int> s1;
+    fi(i,0,n){
+        if(a[i]<=k){
+            int x= s.size();
+            s.insert(a[i]);
+            if(s.size()>x) ca++;
+        }
+    }
+    fi(i,0,m){
+        if(b[i]<=k){
+            int x = s1.size();
+            s1.insert(b[i]);
+            if(s1.size()>x) cb++;
+        }
+    }
+    for(auto it: s1) s.insert(it);
+    // cout << ca << " " << cb << " " << s.size() << endl;
+    if(ca>=k/2 && cb>=k/2 && s.size()==k) couty;
+    else coutn;
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
