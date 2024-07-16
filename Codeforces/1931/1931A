@@ -1,0 +1,56 @@
+// problem link: https://codeforces.com/contest/1931/problem/A
+// Problem Name: A. Recovering a Small String
+// Contest Name: Codeforces Round 925
+// Div: 3
+
+// Problem tags: brute force, strings
+// difficulty: *800
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    int n;
+    cin >> n;
+    if(n<=28){
+        cout << "aa" << (char)(n-2+'a'-1) << endl;
+    }
+    else if(n<=53){
+        cout << "a" << (char)(n-27+'a'-1) << "z" << endl;
+    }
+    else{
+        cout << (char)(n-52+'a'-1) << "zz" << endl; 
+    }
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
