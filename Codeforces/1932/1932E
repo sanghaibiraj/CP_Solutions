@@ -1,0 +1,62 @@
+// problem link: https://codeforces.com/contest/1932/problem/E
+// Problem Name: E. Final Countdown
+// Contest Name: Codeforces Round 927
+// Div: 3
+
+// Problem tags: implementation, math, number theory
+// difficulty: *1600
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n, sum=0, carry=0, c=0;
+    cin>>n;
+    string s, ans="";
+    cin>>s;
+    fi(i,0,n) sum += (s[i]-'0');
+    fd(i,n-1,-1){
+        ans.push_back((char)((sum+carry)%10)+'0');
+        carry = (sum+carry)/10;
+        sum -= (int)(s[i]-'0');
+    }
+    reverse(ans.begin(), ans.end());
+    if(carry==1){cout << 1 << ans << endl; return;}
+    while(true){
+        if(ans[c]=='0') c++;
+        else break;
+    }
+    cout(ans.substr(c,ans.size()-c));
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}

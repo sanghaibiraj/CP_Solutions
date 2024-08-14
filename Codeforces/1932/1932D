@@ -1,0 +1,77 @@
+// problem link: https://codeforces.com/contest/1932/problem/D
+// Problem Name: D. Card Game
+// Contest Name: Codeforces Round 927
+// Div: 3
+
+// Problem tags: greedy, implementation
+// difficulty: *1400
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    int n,cnt=0,index=0;
+    cin >> n;
+    n =2*n;
+    char ch;
+    cin >> ch;
+    string a[n];
+    ain(i,a,n);
+    unordered_map<char, vector<string>> mp;
+    fi(i,0,n){
+        mp[a[i][1]].push_back(a[i]);
+    }
+    // for(auto it: mp){
+    //     cout << it.first << " ";
+    //     for(int i=0; i < it.second.size(); i++) cout << it.second[i] << " ";
+    //     cout << "\n";
+    // }
+    for(auto it: mp){
+        cnt += it.second.size()%2;
+    }
+    cnt -= mp[ch].size()%2;
+    if(cnt>mp[ch].size()){cout("IMPOSSIBLE"); return;}
+    if((mp[ch].size()-cnt)%2==1){{cout("IMPOSSIBLE"); return;}}
+
+    sort(mp[ch].begin(), mp[ch].end());
+    for(auto it: mp){
+        sort(it.second.begin(), it.second.end());
+        if(ch==it.first) continue;
+        for(int i=1;i<it.second.size();i+=2) cout << it.second[i-1] << " " << it.second[i] << endl;
+        if(it.second.size()%2==1){ cout << it.second[it.second.size()-1] << " " << mp[ch][index] << endl; index++;}
+    }
+    
+    for(int i=index+1;i<mp[ch].size();i+=2) cout << mp[ch][i-1] << " "<< mp[ch][i] << endl;
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
