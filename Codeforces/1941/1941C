@@ -1,0 +1,62 @@
+// problem link: https://codeforces.com/contest/1941/problem/C
+// Problem Name: C. Rudolf and the Ugly String
+// Contest Name: Codeforces Round 933
+// Div: 3
+
+// Problem tags: dp, greedy, strings
+// difficulty: *900
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n,c=0;
+    string s;
+    cin >> n >> s;
+    if(n>=3)
+        if(s[0]=='p' && s[1]=='i' && s[2]=='e') c++;
+    if(n>=4)
+        if(s[1]=='p' && s[2]=='i' && s[3]=='e') c++;
+    if(n>=3)
+        if(s[n-3]=='m' && s[n-2]=='a' && s[n-1]=='p') c++;
+    if(n>=4)
+        if(s[n-4]=='m' && s[n-3]=='a' && s[n-2]=='p') c++;
+    fi(i,2,n-2){
+        if(s[i]=='p'){
+            if((s[i-2]=='m'&&s[i-1]=='a') || (s[i+1]=='i'&&s[i+2]=='e')) c++;
+        }
+    }
+    cout(c);
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}

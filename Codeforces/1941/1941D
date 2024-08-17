@@ -1,0 +1,88 @@
+// problem link: https://codeforces.com/contest/1941/problem/D
+// Problem Name: D. Rudolf and the Ball Game
+// Contest Name: Codeforces Round 933
+// Div: 3
+
+// Problem tags: dfs and similar, dp, implementation
+// difficulty: *1200
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n,m,x;
+    cin >> n >> m >> x;
+    set<lil> s1, s2;
+    s1.insert(x);
+    fi(i,0,m){
+        lil r;
+        char ch;
+        cin >> r >> ch;
+        if(ch=='0'){
+            for(auto it: s1){
+                lil y = (it+r)%n;
+                if(y==0) y=n;
+                s2.insert(y);
+            }
+        }
+        else if(ch=='1'){
+            for(auto it: s1){
+                lil y;
+                if(it>r) y=it-r;
+                else y=n-(r-it);
+                if(y==0) y=n;
+                s2.insert(y);
+            }
+        }
+        else{
+            for(auto it: s1){
+                lil y = (it+r)%n;
+                if(y==0) y=n;
+                s2.insert(y);
+                lil z;
+                if(it>r) z=it-r;
+                else z=n-(r-it);
+                if(z==0) z=n;
+                s2.insert(z);
+            }
+        }
+        s1.clear();
+        for(auto it: s2) s1.insert(it);
+        s2.clear();
+    }
+    cout(s1.size());
+    for(auto it: s1) cout << it << " ";
+    cout << endl;
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
