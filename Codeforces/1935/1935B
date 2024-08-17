@@ -1,0 +1,81 @@
+// problem link: https://codeforces.com/contest/1935/problem/B
+// Problem Name: B. Informatics in MAC
+// Contest Name: Codeforces Round 932
+// Div: 2
+
+// Problem tags: constructive algorithms
+// difficulty: *1200
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(lil i=s;i<e;i++)
+#define fd(i,s,e) for(lil i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n;
+    cin >> n;
+    lil a[n];
+    ain(i,a,n);
+    map<lil,lil> mp;
+    lil mn = n+5, mex=0,first=0, second=n-1;
+    fi(i,0,n) mp[a[i]]++;
+    fi(i,0,n+2){
+        if(mp[i]==0){mex=i; break;}
+        mn = min(mn,mp[i]);
+    }
+    if(mn==1){cout(-1); return;}
+    if(mn==n+5){
+        cout(n);
+        fi(i,1,n+1){
+            cout(i << " " << i);
+        }
+        return;
+    }
+    set<lil> s1, s2;
+    fi(i,0,n){
+        if(a[i]<mex) s1.insert(a[i]);
+        if(s1.size()==mex){first=i; break;}
+    }
+    fd(i,n-1,-1){
+        if(a[i]<mex) s2.insert(a[i]);
+        if(s2.size()==mex){second=i; break;}
+    }
+    if(first<second){
+        cout(2);
+        cout(1 << " " << first+1);
+        cout(first+2 << " " << n);
+    }
+    else{
+        cout(-1);
+    }
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
