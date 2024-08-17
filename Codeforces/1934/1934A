@@ -1,0 +1,52 @@
+// problem link: https://codeforces.com/contest/1934/problem/A
+// Problem Name: A. Too Min Too Max
+// Contest Name: Codeforces Round 931
+// Div: 2
+
+// Problem tags: greedy, math
+// difficulty: *800
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    int n;
+    cin >> n;
+    int a[n];
+    ain(i,a,n);
+    sort(a,a+n);
+    int ans = abs(a[0]-a[n-1]) + abs(a[n-1]-a[1]) + abs(a[1]-a[n-2]) + abs(a[n-2]-a[0]);
+    cout(ans);
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
