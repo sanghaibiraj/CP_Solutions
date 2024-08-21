@@ -1,0 +1,75 @@
+// problem link: https://codeforces.com/contest/244/problem/B
+// Problem Name: B. Undoubtedly Lucky Numbers
+// Contest Name: Codeforces Round 150
+// Div: 2
+
+// Problem tags: bitmasks, brute force, dfs and similar
+// difficulty: *1600
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(lil i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+// set<lil> lucky;
+
+// void next(int n, int f, int s, int num){
+//     if(n){
+//         if(n>num) return;
+//         lucky.insert(n);
+//     }
+//     if(!(n==0 && f==0)) next(n*10+f, f, s, num);
+//     if(!(n==0 && s==0)) next(n*10+s, f, s, num);
+// }
+
+void solve(){
+    lil num;
+    cin >> num;
+    set<lil> lucky;
+    fi(i,0,10){
+        fi(j,i+1,10){
+            fi(l,0,(1<<9)+1){
+                lil n=0;
+                fi(k,0,10){
+                    if((l>>k)&1==1) n = n*10+i;
+                    else n = n*10+j;
+                    // k = k>>1;
+                    if(n>0 && n<=num){ lucky.insert(n);}
+                }
+                // if(i==2) couty;
+                // if(n>0 && n<=num){ lucky.push_back(n); cout(n);}
+            }
+        }
+    }
+    if(num==1000000000) lucky.insert(1000000000);
+    cout(lucky.size());
+}
+int main() {
+        int t=1;
+        while(t--){
+            solve();
+        }
+}

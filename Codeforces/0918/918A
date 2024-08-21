@@ -1,0 +1,60 @@
+// problem link: https://codeforces.com/contest/918/problem/A
+// Problem Name: A. Eleven
+// Contest Name: Codeforces Round 459
+// Div: 2
+
+// Problem tags: brute force, implementation
+// difficulty: *800
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    int a[1001] = {0};
+    a[0]=1, a[1]=1;
+    int x=1, y=2;
+    while(y<1001){
+        x += y;
+        swap(x,y);
+        if(y>1000) break;
+        a[y-1]=1;
+    }
+    int n;
+    cin >> n;
+    fi(i,0,n){
+        if(a[i]==0) cout << "o";
+        else cout << "O";
+    }
+    cout << endl;
+}
+int main() {
+        int t=1;
+        while(t--){
+            solve();
+        }
+}
