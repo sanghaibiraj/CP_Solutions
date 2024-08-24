@@ -1,0 +1,70 @@
+// problem link: https://codeforces.com/contest/75/problem/C
+// Problem Name: C. Modified GCD
+// Contest Name: Codeforces Beta Round 67
+// Div: 2
+
+// Problem tags: binary search, number theory
+// difficulty: *1600
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil a,b,n;
+    cin >> a >> b >> n;
+    lil g = gcd(a,b);
+    vector<lil> v;
+    for(int i=1;i*i<=g;i++){
+        if(g%i==0 && i<=(g/i)){
+            v.push_back(i);
+            if(i!=g/i) v.push_back(g/i);
+        }
+    }
+    sort(v.begin(), v.end());
+    // v.push_back(g);
+    fi(i,0,n){
+        lil x,y;
+        cin >> x >> y;
+        int p = lower_bound(v.begin(), v.end(), x) - v.begin();
+        if(p==v.size()) cout(-1);
+        else{
+            if(v[p]>y) cout(-1);
+            else if(p==v.size()-1) cout(v[p]);
+            else{
+                while(p!=v.size()-1 && v[p+1]<=y) p++;
+                cout(v[p]);
+            }
+        }
+    } 
+}
+int main() {
+        int t=1;
+        while(t--){
+            solve();
+        }
+}

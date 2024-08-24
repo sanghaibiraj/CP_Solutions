@@ -1,0 +1,56 @@
+// problem link: https://codeforces.com/contest/1266/problem/A
+// Problem Name: A. Competitive Programmer
+// Contest Name: Codeforces Global Round 6
+
+// Problem tags: chinese remainder theorem, math
+// difficulty: *1000
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    string s;
+    cin >> s;
+    int c=0, sum=0, e=0;
+    fi(i,0,s.length()){
+        if(s[i]=='0') c++;
+        else if((s[i]-'0')%2==0) e++;
+        sum += (s[i]-'0');
+    }
+    if(c>1) e++;
+    if(sum==0) cout("red");
+    else if(sum%3==0 && e>0 && c>0) cout("red");
+    else cout("cyan");
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
