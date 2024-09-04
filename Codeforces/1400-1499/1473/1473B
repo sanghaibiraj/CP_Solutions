@@ -1,0 +1,70 @@
+// problem link: https://codeforces.com/contest/1473/problem/C
+// Problem Name: B. String LCM
+// Contest Name: Educational Codeforces Round 102
+// div: 2
+
+// Problem tags: brute force, math, number theory, strings
+// difficulty: *1000
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    string a,b;
+    cin >> a >> b;
+    bool flag = true;
+    int na = a.length(), nb=b.length();
+    int g = gcd(na,nb);
+    fi(i,1,g+1){
+        if(g%i==0){
+            string sa = a.substr(0,i);
+            string sb = b.substr(0,i);
+            if(sa!=sb) continue;
+            string s1="";
+            string s2="";
+            int c1=0, c2=0;
+            while(s1.length()<na){ s1+=sa; c1++;}
+            if(s1!=a) continue;
+            while(s2.length()<nb){ s2+=sb; c2++;}
+            if(s2!=b) continue;
+            c1 = c1*c2/gcd(c1,c2);
+            flag=false;
+            fi(i,0,c1) cout << sa;
+            cout << endl;
+            break;
+        }
+    }
+    if(flag) cout(-1);
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
