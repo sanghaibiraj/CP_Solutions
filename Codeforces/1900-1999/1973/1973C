@@ -1,0 +1,71 @@
+// problem link: https://codeforces.com/contest/1973/problem/C
+// Problem Name: C. Cat, Fox and Double Maximum
+// Contest Name: Codeforces Round 945
+// Div: 2
+
+// Problem tags: constructive algorithms, greedy, implementation, math, sortings
+// difficulty: *1700
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n, one;
+    cin >> n;
+    vector<lil> p(n);
+    ain(i,p,n);
+    fi(i,0,n) if(p[i]==1){one=i; break;}
+    one &= 1;
+    int two = !one;
+    vector<pair<lil,lil>> v;
+    vector<pair<lil,lil>> v2;
+    v2.push_back({p[0],0});
+    v2.push_back({p[n-1],n-1});
+    for(int i=1;i<n-1;i+=2){
+        v.push_back({p[i+one], i+one});
+        v2.push_back({p[i+two], i+two});
+    }
+    sort(v.begin(), v.end());
+    sort(v2.rbegin(), v2.rend());
+    vector<lil> q(n,0);
+    for(int i=n;i>n/2+1;i--){
+        q[v[n-i].second] = i;
+    }
+    for(int i=0;i<n/2+1;i++){
+        q[v2[i].second] = i+1;
+    }
+    fi(i,0,n) cout << q[i] << " ";
+    cout << endl;
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}

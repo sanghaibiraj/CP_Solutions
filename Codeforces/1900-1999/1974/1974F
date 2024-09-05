@@ -1,0 +1,114 @@
+// problem link: https://codeforces.com/contest/1974/problem/F
+// Problem Name: F. Cutting Game
+// Contest Name: Codeforces Round 946
+// Div: 3
+
+// Problem tags: binary search, brute force, data structures, implementation, sortings, two pointers
+// difficulty: *1900
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    int a,b,n,m;
+    int alice=0, bob=0;
+    cin >> a >> b >> n >> m;
+    vector<pair<int,int>> row;
+    vector<pair<int,int>> col;
+    set<pair<int,int>> del;
+    fi(i,0,n){
+        int x,y;
+        cin >> x >> y;
+        row.push_back({x,y});
+        col.push_back({y,x});
+    }
+    sort(row.begin(), row.end());
+    sort(col.begin(), col.end());
+    int l=1, r=b, u=1, d=a;
+    int cl=0, cr=n-1, rl = 0, rr=n-1;
+    fi(i,0,m){
+        char ch;
+        int k;
+        cin >> ch >> k;
+        if(ch=='U'){
+            u += k;
+            while(row[rl].first<u && rl<=rr){
+                if(del.find(row[rl])==del.end()){
+                    del.insert(row[rl]);
+                    if(i%2==0) alice++;
+                    else bob++;
+                }
+                rl++;
+            }
+        }
+        else if(ch=='D'){
+            d -= k;
+            while(row[rr].first>d && rl<=rr){
+                if(del.find(row[rr])==del.end()){
+                    del.insert(row[rr]);
+                    if(i%2==0) alice++;
+                    else bob++;
+                }
+                rr--;
+            }
+        }
+        else if(ch=='L'){
+            l += k;
+            while(col[cl].first<l && cl<=cr){
+                pair<int, int> p = {col[cl].second, col[cl].first};
+                if(del.find(p)==del.end()){
+                    del.insert(p);
+                    if(i%2==0) alice++;
+                    else bob++;
+                }
+                cl++;
+            }
+        }
+        else{
+            r -= k;
+            while(col[cr].first>r && cl<=cr){
+                pair<int, int> p = {col[cr].second, col[cr].first};
+                if(del.find(p)==del.end()){
+                    del.insert(p);
+                    if(i%2==0) alice++;
+                    else bob++;
+                }
+                cr--;
+            }
+        }
+        // sort(del.begin(), del.end());
+    }
+    cout << alice << " " << bob << endl;
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}

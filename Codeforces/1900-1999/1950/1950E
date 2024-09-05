@@ -1,0 +1,71 @@
+// problem link: https://codeforces.com/contest/1950/problem/E
+// Problem Name: E. Nearly Shortest Repeating Substring
+// Contest Name: Codeforces Round 937
+// Div: 4
+
+// Problem tags: brute force, implementation, number theory, strings
+// difficulty: *1500
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    int n;
+    string s;
+    cin >> n >> s;
+    fi(i,1,n+1){
+        if(n%i==0){
+            int c=0;
+            fi(j,0,i){
+                for(int k=j+i;k<n;k+=i){
+                    if(s[j]!=s[k]) c++;
+                    if(c>1) break;
+                }
+                if(c>1) break;
+            }
+            if(c<2){cout(i); return;}
+            c=0;
+            fd(j,n-1,n-1-i){
+                for(int k=j-i;k>=0;k-=i){
+                    if(s[j]!=s[k]) c++;
+                    if(c>1) break;
+                }
+                if(c>1) break;
+            }
+            if(c<2){cout(i); return;}
+        }
+
+    }
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}

@@ -1,0 +1,83 @@
+// problem link: https://codeforces.com/contest/1974/problem/D
+// Problem Name: D. Ingenuity-2
+// Contest Name: Codeforces Round 946
+// Div: 3
+
+// Problem tags: constructive algorithms, greedy, implementation
+// difficulty: *1400
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+#define lil long long int
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+#define min3(a, b, c) (a < b && a < c) ? a : (b < c) ? b : c
+#define max3(a, b, c) (a > b && a > c) ? a : (b > c) ? b : c
+#define fi(i, s, e) for (int i = s; i < e; i++)
+#define fd(i, s, e) for (int i = s; i > e; i--)
+#define ain(i, arr, n); for (int i = 0; i < n; i++){ cin >> arr[i];}
+#define aout(i, arr, n); for (int i = 0; i < n; i++){cout << arr[i] << "\t";}
+
+using namespace std;
+
+int gcd(int a, int b){
+    if (b == 0) return a;
+    return gcd(b, a % b);}
+
+void solve(){
+    int n, cn = 0, cw = 0, cs = 0, ce = 0;
+    string s;
+    cin >> n >> s;
+    fi(i, 0, n){
+        if (s[i] == 'N') cn++;
+        else if (s[i] == 'S') cs++;
+        else if (s[i] == 'W') cw++;
+        else ce++;
+    }
+    if ((cn + cs) % 2 != 0 || (cw + ce) % 2 != 0){ cout("NO"); return; }
+    if (cn == 0 && cs == 0 && ce == 1 && cw == 1){ cout("NO"); return; }
+    if (cn == 1 && cs == 1 && ce == 0 && cw == 0){ cout("NO"); return; }
+    if (cn == cs && cw == ce){
+        if (cw == 0){ cn = 1; cs = 1; }
+        else{ cw = 1; ce = 1; cn = 0; cs = 0; }
+    }
+    else{
+        if (cn > cs){ cn = (cn - cs)/2; cs = 0; }
+        else{ cs = (cs - cn)/2; cn = 0; }
+        if (cw > ce){ cw = (cw - ce)/2; ce = 0; }
+        else{ ce = (ce - cw)/2; cw = 0; }
+    }
+    fi(i, 0, n){
+        if (s[i] == 'N'){
+            if (cn > 0){ cout << "R"; cn--; }
+            else{ cout << "H";}
+        }
+        else if (s[i] == 'S'){
+            if (cs > 0){ cout << "R"; cs--; }
+            else{ cout << "H"; }
+        }
+        else if (s[i] == 'E'){
+            if (ce > 0){ cout << "R"; ce--;}
+            else{ cout << "H"; }
+        }
+        else{
+            if (cw > 0){cout << "R"; cw--;}
+            else{ cout << "H"; }
+        }
+    }
+    cout << endl;
+}
+int main()
+{
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        solve();
+    }
+}

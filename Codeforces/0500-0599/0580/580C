@@ -1,0 +1,72 @@
+// problem link: https://codeforces.com/contest/580/problem/C
+// Problem Name: C. Kefa and Park
+// Contest Name: Codeforces Round 321
+// Div: 2
+
+// Problem tags: dfs and similar, graphs, trees
+// difficulty: *1500
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+lil ans;
+
+void dfs(lil v, lil p, vector<lil>& cat, vector<lil> tr[], lil cnt, lil m){
+    if(cnt>m) return;
+    bool leaf=true;
+    for(int i=0;i<tr[v].size();i++){
+        if(tr[v][i]==p) continue;
+        leaf=false;
+        if(cat[tr[v][i]]==0) dfs(tr[v][i], v, cat, tr, 0, m);
+        else dfs(tr[v][i], v, cat, tr, cnt+1, m);
+    }
+    if(leaf) ans++;
+}
+
+void solve(){
+    lil n,m,c=0;
+    cin >> n >> m;
+    vector<lil> cat(n+1);
+    fi(i,1,n+1) cin >> cat[i];
+    vector<lil> tr[n+1];
+    fi(i,1,n){
+        lil x,y;
+        cin >> x >> y;
+        tr[x].push_back(y);
+        tr[y].push_back(x);
+    }
+    if(cat[1]==1) c=1;
+    dfs(1, 0, cat, tr, c, m);
+    cout(ans);
+}
+int main() {
+        int t=1;
+        while(t--){
+            solve();
+        }
+}

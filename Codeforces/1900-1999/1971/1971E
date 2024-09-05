@@ -1,0 +1,74 @@
+// problem link: https://codeforces.com/contest/1971/problem/E
+// Problem Name: E. Find the Car
+// Contest Name: Codeforces Round 944
+// Div: 4
+
+// Problem tags: binary search, math, sortings
+// difficulty: *1500
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n, k, q;
+    cin >> n >> k >> q;
+    vector<lil> a(k+2);
+    vector<lil> b(k+2);
+    // a.push_back(0ll);
+    // b.push_back(0ll);
+    a[0]=0;
+    b[0]=0;
+    fi(i,1,k+1) cin >> a[i];
+    fi(i,1,k+1) cin >> b[i];
+    // cout(n+1);
+    a[k+1] = n+1;
+    b[k+1] = n+1;
+    // fi(i,0,k+2) cout << a[i] << " ";
+    // cout << endl;
+    fi(i,0,q){
+        lil x;
+        cin >> x;
+        // cout(x);
+        lil y = lower_bound(a.begin(), a.end(), x) - a.begin();
+        // cout(y);
+        if(a[y]==x){cout << b[y] << " "; continue;}
+        // long double z = (((long double)(a[y]-a[y-1]))/(long double)(b[y]-b[y-1]));
+        lil z = (x-a[y-1]) * (b[y]-b[y-1]) / (a[y]-a[y-1]);
+    // couty;
+    // cout(z);
+        cout << ( b[y-1] + z) << " ";
+    }
+    cout << endl;
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
