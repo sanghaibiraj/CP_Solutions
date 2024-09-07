@@ -1,0 +1,70 @@
+// problem link: https://codeforces.com/contest/24/problem/A
+// Problem Name: A. Ring road
+// Contest Name: Codeforces Beta Round 24
+
+// Problem tags: graphs
+// difficulty: *1400
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+vector<pair<int,int>> gr[110];
+lil cost=0;
+lil vis[110];
+
+void dfs(int v){
+    vis[v]=1;
+    for(auto child: gr[v]){
+        if(vis[child.first]==0 || v==1){
+            if(v==1 && vis[child.first]!=0) child.second=0-child.second;
+            if(child.second<0) cost -= child.second;
+            dfs(child.first);
+        }
+    }
+}
+
+void solve(){
+    lil n, sum=0;
+    cin >> n;
+    fi(i,0,n){
+        lil x,y,w;
+        cin >> x >> y >> w;
+        gr[x].push_back({y,w});
+        gr[y].push_back({x,0-w});
+        sum += w;
+    }
+    dfs(1);
+    cost = min(cost, sum-cost);
+    cout(cost);
+}
+int main() {
+        int t=1;
+        while(t--){
+            solve();
+        }
+}

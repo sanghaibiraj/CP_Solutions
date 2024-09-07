@@ -1,0 +1,73 @@
+// problem link: https://codeforces.com/contest/727/problem/A
+// Problem Name: A. Transformation: from A to B
+// Contest Name: Technocup 2017 - Elimination Round 1
+// Div: 1
+
+// Problem tags: brute force, dfs and similar, math
+// difficulty: *1000
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+vector<lil> v;
+bool flag = false;
+
+void check(lil a, lil b){
+    if(a==b) flag = true;
+    if(a>=b) return;
+    lil x = a*2;
+    v.push_back(x);
+    check(x,b);
+    if(flag) return;
+    v.pop_back();
+    x = a*10+1;
+    v.push_back(x);
+    check(x,b);
+    if(flag) return;
+    v.pop_back();
+}
+
+void solve(){
+    lil a,b;
+    cin >> a >> b;
+    v.push_back(a);
+    check(a,b);
+    if(flag){
+        couty;
+        cout(v.size());
+        fi(i,0,v.size()) cout << v[i] << " ";
+        cout << endl;
+    }
+    else coutn;
+}
+int main() {
+        int t=1;
+        while(t--){
+            solve();
+        }
+}

@@ -1,0 +1,76 @@
+// problem link: https://codeforces.com/contest/638/problem/B
+// Problem Name: B. Making Genome in Berland
+// Contest Name: VK Cup 2016 - Qualification Round 2
+
+// Problem tags: *special problem, dfs and similar, strings
+// difficulty: *1500
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    int n;
+    cin >> n;
+    string rt = "", ans="";
+    map<char,char> par;
+    map<char,char> child;
+    set<char> vertex;
+    bool vis[26] = {0};
+    fi(i,0,n){
+        string s;
+        cin >> s;
+        vertex.insert(s[0]);
+        fi(j,1,s.length()){
+            par[s[j]] = s[j-1];
+            vertex.insert(s[j]);
+        }
+        fi(j,0,s.length()-1){
+            child[s[j]] = s[j+1];
+        }
+    }
+    for(auto i: vertex){
+        if(par.find(i)==par.end()) rt += i;
+    }
+    // cout(rt);
+    for(auto i: rt){
+        char j = i;
+        // cout(j);
+        while(child.find(j)!=child.end()){
+            ans += j;
+            j = child[j];
+        }
+        ans += j;
+    }
+    cout(ans);
+}
+int main() {
+        int t=1;
+        while(t--){
+            solve();
+        }
+}

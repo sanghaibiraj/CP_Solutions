@@ -1,0 +1,67 @@
+// problem link: https://codeforces.com/contest/849/problem/C
+// Problem Name: C. From Y to Y
+// Contest Name: Codeforces Round 431
+// Div: 2
+
+// Problem tags: constructive algorithms
+// difficulty: *1600
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil k;
+    cin >> k;
+    if(k==0){ cout("a"); return;}
+    lil c=0,x=1;
+    char ch = 'a';
+    string ans = "";
+    vector<lil> v;
+    while(c<=k){
+        v.push_back(c);
+        c+=x;
+        x++;
+    }
+    while(k>0){
+        auto lb = lower_bound(v.begin(), v.end(), k);
+        if(lb==v.end()) lb--;
+        else if(*lb>k) lb--;
+        fi(i,0,lb-v.begin()+1){
+            ans += ch;
+        }
+        ch++;
+        k -= *lb;
+    }
+    cout(ans);
+}
+int main() {
+        int t=1;
+        while(t--){
+            solve();
+        }
+}
