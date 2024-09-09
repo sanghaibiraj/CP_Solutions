@@ -1,0 +1,73 @@
+// problem link: https://codeforces.com/contest/1985/problem/F
+// Problem Name: F. Final Boss
+// Contest Name: Codeforces Round 952
+// Div: 4
+
+// Problem tags: binary search, data structures
+// difficulty: *1500
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(lil i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n,h,sum=0,ans=0;
+    cin >> h >> n;
+    lil dam[n];
+    lil cd[n];
+    ain(i,dam,n);
+    ain(i,cd,n);
+    fi(i,0,n) sum += dam[i];
+    if(sum>=h){
+        cout(1);
+        return;
+    }
+    // couty;
+    lil l=0, r=LLONG_MAX-10;
+    while(l<=r){
+        lil mid = (l+((r-l)/2));
+        sum=0ll;
+        fi(i,0,n){
+            sum += ((mid-1)/cd[i]+1)*dam[i];
+        }
+        if(sum>=h || sum<0){
+            ans=mid;
+            r=mid-1;
+        }
+        else{
+            l=mid+1;
+        }
+    }
+    cout(ans);
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
