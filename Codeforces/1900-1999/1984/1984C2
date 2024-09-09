@@ -1,0 +1,75 @@
+// problem link: https://codeforces.com/contest/1984/problem/C2
+// Problem Name: C2. Magnitude (Hard Version)
+// Contest Name: Codeforces Global Round 26
+
+// Problem tags: combinatorics, dp, greedy, math
+// difficulty: *1700
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+lil mod = 998244353;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+lil power(lil a, lil b){
+	lil res =1;
+	while(b>0){
+		if(b%2==1)
+			res = ((res%mod) * (a%mod))%mod;
+		a = ((a%mod)*(a%mod))%mod;
+		b /= 2;
+	}
+	return res%mod;
+}
+
+void solve(){
+    lil n, sum=0, mn=0;
+    cin >> n;
+    vector<lil> v(n);
+    ain(i,v,n);
+    fi(i,0,n){
+        sum += v[i];
+        mn = min(mn, sum);
+    }
+    if(mn==0) cout(power(2,n));
+    else{
+        lil pos=0, sum2=0, ans=0;
+        fi(i,0,n){
+            sum2 += v[i];
+            if(sum2==mn) ans = (ans + power(2,pos+n-i-1)) % mod;
+            if(sum2>=0) pos++;
+        }
+        cout(ans);
+    }
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
