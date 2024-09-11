@@ -1,0 +1,100 @@
+// problem link: https://codeforces.com/contest/199/problem/D
+// Problem Name: D. Jumping on Walls
+// Contest Name: Codeforces Round 125
+// Div: 2
+
+// Problem tags: dfs and similar, shortest paths
+// difficulty: *1400
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void bfs(pair<lil,lil> p, vector<vector<char>>& v, lil n, lil k){
+    bool vis[2][n];
+    lil level[2][n];
+    fi(i,0,2){
+        fi(j,0,n){
+            vis[i][j]=0;
+            level[i][j]=0;
+        }
+    }
+    vis[p.first][p.second] = 1;
+    queue<pair<lil,lil>> q;
+    q.push(p);
+    while(!q.empty()){
+        pair<lil, lil> pos = q.front();
+        lil x = pos.first;
+        lil y = pos.second;
+        // cout << x << " " << y << endl;
+        q.pop();
+        if(y+k>=n){
+            couty;
+            return;
+        }
+        if(v[x][y+1] == '-' && !vis[x][y+1]){
+            q.push({x, y+1});
+            vis[x][y+1]=1;
+            level[x][y+1] = level[x][y]+1;
+        }
+        if(v[1-x][y+k] == '-' && !vis[1-x][y+k]){
+            q.push({1-x, y+k});
+            vis[1-x][y+k]=1;
+            level[1-x][y+k] = level[x][y]+1;
+        }
+        if(y>0 && v[x][y-1] == '-' && !vis[x][y-1] && level[x][y]+1<y){
+            q.push({x,y-1});
+            vis[x][y-1]=1;
+            level[x][y-1] = level[x][y]+1;
+        }
+    }
+    coutn;
+    return;
+}
+
+void solve(){
+    lil n,k;
+    cin >> n >> k;
+    vector<vector<char>> v(2);
+    fi(i,0,n){
+        char ch;
+        cin >> ch;
+        v[0].push_back(ch);
+    }
+    fi(i,0,n){
+        char ch;
+        cin >> ch;
+        v[1].push_back(ch);
+    }
+    bfs({0,0}, v, n, k);
+}
+int main() {
+        int t=1;
+        while(t--){
+            solve();
+        }
+}

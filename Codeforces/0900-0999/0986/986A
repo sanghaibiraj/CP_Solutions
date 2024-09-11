@@ -1,0 +1,88 @@
+// problem link: https://codeforces.com/contest/986/problem/A
+// Problem Name: A. Fair
+// Contest Name: Codeforces Round 485
+// (Div. 1)
+
+// Problem tags: graphs, greedy, number theory, shortest paths
+// difficulty: *1600
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void bfs(int rt, vector<vector<lil>>& gr, lil goods[], lil n, vector<vector<lil>>& ans){
+    vector<lil> lev(n,0);
+    vector<lil> vis(n,0);
+    queue<lil> q;
+    fi(i,0,n){
+        if(goods[i]==rt){ q.push(i); vis[i]=1;}
+    }
+    while(!q.empty()){
+        lil x = q.front();
+        q.pop();
+        for(auto child: gr[x]){
+            if(!vis[child]){
+                lev[child] = lev[x]+1;
+                vis[child]=1;
+                q.push(child);
+            }
+        }
+    }
+    fi(i,0,n) ans[i].push_back(lev[i]);
+}
+
+void solve(){
+    lil n,m,s,k;
+    cin >> n >> m >> k >> s;
+    lil goods[n];
+    ain(i,goods,n);
+    vector<vector<lil>> gr(n);
+    fi(i,0,m){
+        lil x,y;
+        cin >> x >> y;
+        gr[x-1].push_back(y-1);
+        gr[y-1].push_back(x-1);
+    }
+    vector<vector<lil>> cost(n);
+    fi(i,1,k+1){
+        bfs(i, gr, goods, n, cost);
+    }
+    vector<lil> ans(n,0);
+    // couty;
+    fi(i,0,n){
+        sort(cost[i].begin(), cost[i].end());
+        fi(j,0,s) ans[i]+=cost[i][j];
+    }
+    fi(i,0,n) cout << ans[i] << " ";
+    cout << endl;
+}
+int main() {
+    int t=1;
+    while(t--){
+        solve();
+    }
+}

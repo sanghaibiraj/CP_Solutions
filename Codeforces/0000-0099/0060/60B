@@ -1,0 +1,78 @@
+// problem link: https://codeforces.com/contest/60/problem/B
+// Problem Name: B. Serial Time!
+// Contest Name: Codeforces Beta Round 56
+
+// Problem tags: dfs and similar, dsu
+// difficulty: *1400
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil k,n,m,ans=0;
+    cin >> k >> n >> m;
+    char a[k][n][m];
+    lil vis[k][n][m];
+    fi(i,0,k){
+        fi(j,0,n){
+            fi(l,0,m){
+                cin >> a[i][j][l];
+                vis[i][j][l]=0;
+            }
+        }
+    }
+    lil x,y;
+    cin >> x >> y;
+    queue<pair<lil,pair<lil,lil>>> q;
+    q.push({0,{x-1,y-1}});
+    while(!q.empty()){
+        pair<lil,pair<lil, lil>> p = q.front();
+        q.pop();
+        lil px = p.first;
+        lil py = p.second.first;
+        lil pz = p.second.second;
+        if(px<0 || py<0 || pz<0) continue;
+        if(px==k || py==n || pz==m) continue;
+        if(vis[px][py][pz]==1 || a[px][py][pz]=='#') continue;
+        vis[px][py][pz]=1;
+        ans++; 
+        q.push({px+1,{py,pz}});
+        q.push({px-1,{py,pz}});
+        q.push({px,{py+1,pz}});
+        q.push({px,{py-1,pz}});
+        q.push({px,{py,pz+1}});
+        q.push({px,{py,pz-1}});
+    }
+    cout(ans);
+}
+int main() {
+        int t=1;
+        while(t--){
+            solve();
+        }
+}
