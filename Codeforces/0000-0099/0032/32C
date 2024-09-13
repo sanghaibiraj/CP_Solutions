@@ -1,0 +1,51 @@
+// problem link: https://codeforces.com/contest/32/problem/C
+// Problem Name: C. Flea
+// Contest Name: Codeforces Beta Round 32
+// Div 2
+
+// Problem tags: math
+// difficulty: *1700
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n,m,s;
+    cin >> n >> m >> s;
+    lil nx=(n-1)/s+1;
+    lil mx=(m-1)/s+1;
+    nx = nx * ((n-1)%s+1);
+    mx = mx * ((m-1)%s+1);
+    cout(nx*mx);
+}
+int main() {
+        int t=1;
+        while(t--){
+            solve();
+        }
+}

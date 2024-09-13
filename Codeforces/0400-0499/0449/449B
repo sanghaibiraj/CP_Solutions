@@ -1,0 +1,104 @@
+// problem link: https://codeforces.com/contest/449/problem/B
+// Problem Name: B. Jzzhu and Cities
+// Contest Name: Codeforces Round 257
+// Div: 1
+
+// Problem tags: graphs, greedy, shortest paths
+// difficulty: *2000
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+lil INF = 1e15+10;
+lil N = 1e5+10;
+vector<pair<pair<lil,lil>,lil>> v[1000000];
+vector<pair<lil,pair<lil,lil>>> dist(N,{INF,{0,0}});
+lil n,m,k,ans=0;
+
+void dijkstra(lil source){
+    vector<lil> vis(n+1,0);
+    dist[source]={0,{0,0}};
+    set<pair<lil,lil>> s;
+    s.insert({0,source});
+    while(s.size()){
+        auto p = *s.begin();
+        lil wt = p.first;
+        lil ver = p.second;
+        s.erase(s.begin());
+        // cout << wt << ver << endl;
+        if(vis[ver]) continue;
+        vis[ver]=1;
+        for(auto child: v[ver]){
+            lil child_v = child.second;
+            lil wt_v = child.first.first;
+            lil x_v = child.first.second;
+            lil y_v = 1-x_v;
+            // cout << ver << child_v << wt_v << x_v << endl;
+            if(dist[ver].first+wt_v < dist[child_v].first){
+                // couty;
+                dist[child_v] = {dist[ver].first+wt_v, {dist[ver].second.first+x_v, dist[ver].second.second+y_v}};
+                s.insert({dist[child_v].first, child_v});
+            }
+            else if(dist[ver].first+wt_v == dist[child_v].first){
+                if(y_v==1){
+                    dist[child_v] = {dist[ver].first+wt_v, {dist[ver].second.first+x_v, dist[ver].second.second+y_v}};
+                    s.insert({dist[child_v].first, child_v});  
+                }
+            }
+        }
+    }
+    // fi(i,1,n+1) ans+=dist[i].second;
+}
+
+void solve(){
+    cin >> n >> m >> k;
+    fi(i,0,m){
+        lil x,y,z;
+        cin >> x >> y >> z;
+        v[x].push_back({{z,0},y});
+        v[y].push_back({{z,0},x});
+    }
+    // vector<lil> train(N,INF);
+    fi(i,0,k){
+        lil y,z;
+        cin >> y >> z;
+        v[1].push_back({{z,1}, y});
+        // train[y]=z;
+    }
+    dijkstra(1);
+    fi(i,1,n+1){
+        if(dist[i].second.second==0 && dist[i].second.first==1) ans++;
+    }
+    cout(k-ans);
+}
+int main() {
+    int t=1;
+    while(t--){
+        solve();
+    }
+}

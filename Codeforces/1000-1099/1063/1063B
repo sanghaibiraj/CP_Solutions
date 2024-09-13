@@ -1,0 +1,108 @@
+// problem link: https://codeforces.com/contest/1063/problem/B
+// Problem Name: B. Labyrinth
+// Contest Name: Codeforces Round 516
+// Div: 1
+
+// Problem tags: graphs, shortest paths
+// difficulty: *1800
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+lil N=1e5+10;
+lil INF=1e9+10;
+vector<vector<lil>> v(N);
+vector<vector<pair<lil,lil>>> lev(N);
+lil n,m,x,y,l,r;
+
+vector<pair<lil,lil>> moves = {{0,1}, {0,-1}, {1,0}, {-1,0}};
+
+bool isValid(lil x, lil y){
+    return x>=0 && y>=0 && x<n && y<m && v[x][y]=='.';
+}
+
+void bfs(){
+    deque<pair<pair<lil,lil>, pair<lil,lil>>> q;
+    q.push_back({{x,y},{0,0}});
+    lev[x][y]={0,0};
+    while(!q.empty()){
+        auto p = q.front();
+        lil px = p.first.first;
+        lil py = p.first.second;
+        lil pl = p.second.first;
+        lil pr = p.second.second;
+        q.pop_front();
+        fi(i,0,4){
+            lil lwt=0, rwt=0;
+            if(i==0){
+                if(pr==r) continue;
+                rwt=1;
+            }
+            if(i==1){
+                if(pl==l) continue;
+                lwt=1;
+            } 
+            lil mx = px+ moves[i].first;
+            lil my = py+ moves[i].second;
+            if(isValid(mx, my) && lev[mx][my].first>lev[px][py].first+lwt && lev[mx][my].second>lev[px][py].second+rwt){
+                lev[mx][my] = {lev[px][py].first+lwt, lev[px][py].second+rwt};
+                if(lwt==0 && rwt==0){
+                    q.push_front({{mx,my}, {pl,pr}});
+                }
+                else{
+                    q.push_back({{mx,my}, {pl+lwt, pr+rwt}});
+                }
+            }
+        }
+    }
+}
+
+void solve(){
+    lil ans=0;
+    cin >> n >> m >> x >> y >> l >> r;
+    x--; y--;
+    fi(i,0,n){
+        fi(j,0,m){
+            char ch;
+            cin >> ch;
+            v[i].push_back(ch);
+            lev[i].push_back({INF,INF});
+        }
+    }
+    bfs();
+    fi(i,0,n){
+        fi(j,0,m){ if(lev[i][j].first<INF) ans++;}
+    }
+    cout(ans);
+}
+int main() {
+        int t=1;
+        while(t--){
+            solve();
+        }
+}

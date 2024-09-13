@@ -1,0 +1,99 @@
+// problem link: https://codeforces.com/contest/598/problem/D
+// Problem Name: D. Igor In the Museum
+// Contest Name: Educational Codeforces Round 1
+// Div: 2
+
+// Problem tags: dfs and similar, graphs, shortest paths
+// difficulty: *1700
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+const int N = 1e5+10;
+lil n,m,k;
+vector<string> g(N);
+vector<vector<lil>> vis(N);
+vector<pair<lil,lil>> moves = {{1,0}, {0,1}, {-1,0}, {0,-1}};
+
+void bfs(lil x, lil y){
+    vector<pair<lil,lil>> vec;
+    lil ct=0;
+    queue<pair<lil,lil>> q;
+    q.push({x,y});
+    vis[x][y]=1;
+    while(!q.empty()){
+        auto p = q.front();
+        q.pop();
+        vec.push_back(p);
+        for(auto it: moves){
+            // cout(ct);
+            lil px=p.first+it.first;
+            lil py=p.second+it.second;
+            // cout << px << " " << py << endl;
+            if(g[px][py]=='*'){ct++;}
+            else{
+                if(vis[px][py]>0) continue; 
+                q.push({px,py}); 
+                vis[px][py]=1;
+            }
+        }
+    }
+    // cout << endl;
+    for(auto it: vec){
+        // cout << it.first << " " << it.second << endl;
+        vis[it.first][it.second]=ct;
+    }
+}
+
+void solve(){
+    cin >> n >> m >> k;
+    fi(i,0,n){
+        cin >> g[i];
+        fi(j,0,m) vis[i].push_back(0);
+    }
+    fi(i,0,k){
+        lil x,y;
+        cin>> x >> y;
+        // couty;
+        x--;
+        y--;
+        // cout(vis[x][y]);
+        if(vis[x][y]>0) cout << vis[x][y] << endl;
+        else{
+        // couty;
+            bfs(x,y);
+            cout << vis[x][y] << endl;
+        }
+    }
+}
+int main() {
+    int t=1;
+    while(t--){
+        solve();
+    }
+}

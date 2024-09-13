@@ -1,0 +1,124 @@
+// problem link: https://codeforces.com/contest/769/problem/C
+// Problem Name: C. Cycle In Maze
+// Contest Name: VK Cup 2017 - Qualification 1
+
+// Problem tags: *special problem, dfs and similar, graphs, greedy, shortest paths
+// difficulty: *1700
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+lil INF = 1e9+10;
+
+void bfs(lil x, lil y, lil n, lil m, vector<vector<char>>& v, vector<vector<lil>>& level){
+    queue<pair<lil,lil>> q;
+    q.push({x,y});
+    level[x][y]=0;
+    while(!q.empty()){
+        int px = q.front().first;
+        int py = q.front().second;
+        q.pop();
+        if(px!=n-1 && v[px+1][py]!='*' && level[px+1][py]==INF){
+            level[px+1][py] = level[px][py]+1;
+            q.push({px+1,py});
+        }
+        if(py!=m-1 && v[px][py+1]!='*' && level[px][py+1]==INF){
+            level[px][py+1] = level[px][py]+1;
+            q.push({px,py+1});
+        }
+        if(px!=0 && v[px-1][py]!='*' && level[px-1][py]==INF){
+            level[px-1][py] = level[px][py]+1;
+            q.push({px-1,py});
+        }
+        if(py!=0 && v[px][py-1]!='*' && level[px][py-1]==INF){
+            level[px][py-1] = level[px][py]+1;
+            q.push({px,py-1});
+        }
+    }
+}
+
+void solve(){
+    lil n,m,k,x,y;
+    string ans = "";
+    cin >> n >> m >> k;
+    vector<vector<char>> v(n);
+    vector<vector<lil>> level(n);
+    fi(i,0,n){
+        fi(j,0,m){
+            level[i].push_back(INF);
+            char ch;
+            cin >> ch;
+            if(ch=='X'){
+                x=i;
+                y=j;
+                v[i].push_back('.');
+            }
+            else{
+                v[i].push_back(ch);
+            }
+        }
+    }
+    if(k%2==1){
+        cout("IMPOSSIBLE");
+        return;
+    }
+    bfs(x,y,n,m,v,level);
+    while(k){
+        if(x!=n-1 && level[x+1][y]<k){
+            ans += 'D';
+            x++;
+            k--;
+        }
+        else if(y!=0 && level[x][y-1]<k){
+            ans += 'L';
+            y--;
+            k--;
+        }
+        else if(y!=m-1 && level[x][y+1]<k){
+            ans += 'R';
+            y++;
+            k--;
+        }
+        else if(x!=0 && level[x-1][y]<k){
+            ans += 'U';
+            x--;
+            k--;
+        }
+        else{
+            ans = "IMPOSSIBLE";
+            break;
+        }
+    }
+    cout(ans);
+}
+int main() {
+        int t=1;
+        while(t--){
+            solve();
+        }
+}
