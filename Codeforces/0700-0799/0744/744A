@@ -1,0 +1,92 @@
+// problem link: https://codeforces.com/contest/744/problem/A
+// Problem Name: A. Hongcow Builds A Nation
+// Contest Name: Codeforces Round 385
+// Div: 1
+
+// Problem tags: dfs and similar, graphs
+// difficulty: *1500
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+const int N = 1e5+10;
+lil n,m,k,c=0,e=0;
+vector<lil> g[N];
+vector<lil> vis(N,0);
+
+void bfs(lil r){
+    queue<lil> q;
+    q.push(r);
+    vis[r]=1;
+    while(!q.empty()){
+        lil node = q.front();
+        q.pop();
+        c++;
+        e += g[node].size();
+        for(auto child: g[node]){
+            if(vis[child]) continue;
+            vis[child]=1;
+            q.push(child);
+        }
+    }
+}
+
+void solve(){
+    lil mx=0,ans=0,sumc=0, sume=0;
+    cin >> n >> m >> k;
+    lil a[k];
+    fi(i,0,k) cin >> a[i];
+    fi(i,0,m){
+        lil x,y;
+        cin >> x >> y;
+        g[x].push_back(y);
+        g[y].push_back(x);
+    }
+    fi(i,0,k){
+        bfs(a[i]);
+        mx = max(mx,c);
+        e/=2;
+        ans += (c*(c-1)/2 - e);
+        // cout(c << " " << e << " " << ans);
+        sumc += c;
+        sume+=e;
+        c=0;
+        e=0;
+    }
+    // couty;
+    sumc = n-sumc;
+    ans += sumc*mx;
+    ans += sumc*(sumc-1)/2-(m-sume);
+    cout(ans);
+}
+int main() {
+        int t=1;
+        while(t--){
+            solve();
+        }
+}
