@@ -1,0 +1,64 @@
+// problem link: https://codeforces.com/contest/2002/problem/C
+// Problem Name: C. Black Circles
+// Contest Name: EPIC Institute of Technology Round August 2024
+// Div. 1+2
+
+// Problem tags: brute force, geometry, greedy, math
+// difficulty: *1200
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n;
+    cin >> n;
+    vector<pair<lil,lil>> v;
+    fi(i,0,n){
+        lil x,y;
+        cin >> x >> y;
+        v.push_back({x,y});
+    }
+    lil a,b,c,d;
+    cin >> a >> b >> c >> d;
+    lil dis = (c-a)*(c-a)+(d-b)*(d-b);
+    fi(i,0,n){
+        lil dist = (v[i].first-c)*(v[i].first-c) + (v[i].second-d)*(v[i].second-d);
+        if(dist<=dis){
+            coutn;
+            return;
+        }
+    }
+    couty;
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
