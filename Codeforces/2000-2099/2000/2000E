@@ -1,0 +1,72 @@
+// problem link: https://codeforces.com/contest/2000/problem/E
+// Problem Name: E. Photoshoot for Gorillas
+// Contest Name: Codeforces Round 966
+// Div. 3
+
+// Problem tags: combinatorics, data structures, greedy, math
+// difficulty: *1400
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(lil i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n,m,k,w;
+    cin >> n >> m >> k >> w;
+    vector<lil> a(w);
+    vector<lil> v;
+    ain(i,a,w);
+    sort(a.rbegin(), a.rend());
+    fi(i,0,n){
+        fi(j,0,m){
+            lil x = min(i+1,n-i);
+            lil y = min(j+1,m-j);
+            if(2*k-1<=n){
+                x = min(x,k);
+            }else{
+                x = min(x,n-k+1);
+            }
+            if(2*k-1<=m){
+                y = min(y,k);
+            }else{
+                y = min(y,m-k+1);
+            }
+            v.push_back(x*y);
+        }
+    }
+    sort(v.rbegin(), v.rend());
+    lil ans=0;
+    fi(i,0,w) ans += a[i]*v[i];
+    cout(ans);
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}

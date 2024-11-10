@@ -1,0 +1,96 @@
+// problem link: https://codeforces.com/contest/2000/problem/C
+// Problem Name: C. Numeric String Template
+// Contest Name: Codeforces Round 966
+// Div. 3
+
+// Problem tags: data structures, strings
+// difficulty: *1000
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n;
+    cin >> n;
+    lil a[n];
+    lil b[n];
+    ain(i,a,n);
+    map<lil, lil> mp;
+   
+    fi(i,0,n){
+        if(mp.find(a[i])==mp.end()){
+            b[i]=-1;
+        }
+        else{
+            b[i]=mp[a[i]];
+        }
+        mp[a[i]]=i;
+    }
+    lil q;
+    cin >>q;
+    while(q--){
+        string s;
+        cin >> s;
+        map<char, lil> mps;
+        bool flag = true;
+        if(s.length()!=n){
+            coutn;
+            continue;
+        }
+        fi(i,0,n){
+            if(b[i]==-1){
+                if(mps.find(s[i])!=mps.end()){
+                    coutn;
+                    flag=false;
+                    break;
+                }
+            }
+            else if(mps.find(s[i])==mps.end()){
+                if(b[i]>=0){
+                    coutn;
+                    flag=false;
+                    break;
+                }
+            }
+            else if(mps[s[i]]!=b[i]){
+                coutn;
+                flag=false;
+                break;
+            }
+            mps[s[i]]=i;
+        }
+        if(flag) couty;
+    }
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
