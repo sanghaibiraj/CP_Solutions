@@ -1,0 +1,72 @@
+// problem link: https://codeforces.com/contest/25/problem/C
+// Problem Name: C. Roads in Berland
+// Contest Name: Codeforces Beta Round 25
+// Div. 2
+
+// Problem tags: graphs, shortest paths
+// difficulty: *1900
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    int n;
+    cin >> n;
+    lil mat[n+1][n+1];
+    fi(i,1,n+1){
+        fi(j,1,n+1){
+            cin >> mat[i][j];
+        }
+    }
+    int k;
+    cin >> k;
+    while(k--){
+        int a,b;
+        lil c,cost=0;
+        cin >> a >> b >> c;
+        if(mat[a][b]>c){
+            mat[a][b]=c;
+            mat[b][a]=c;
+        }
+        fi(i,1,n+1){
+            fi(j,1,n+1){
+                mat[i][j] = min(mat[i][j], mat[i][a]+c+mat[b][j]);
+                mat[i][j] = min(mat[i][j], mat[i][b]+c+mat[a][j]);
+                if(j>i) cost+=mat[i][j];
+            }
+        }
+        cout << cost << " ";
+    }
+    cout << endl;
+}
+int main() {
+        int t=1;
+        while(t--){
+            solve();
+        }
+}

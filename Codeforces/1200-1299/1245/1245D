@@ -1,0 +1,112 @@
+// problem link: https://codeforces.com/contest/1245/problem/D
+// Problem Name: D. Shichikuji and Power Grid
+// Contest Name: Codeforces Round 597
+// div: 2
+
+// Problem tags: dsu, graphs, greedy, shortest paths, trees
+// difficulty: *1900
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+const int N = 1e4;
+int parent[N];
+int Size[N];
+
+void make(int v){
+    parent[v]=v;
+    Size[v]=1;
+}
+
+int find(int v){
+    if(v == parent[v]) return v;
+    return parent[v]=find(parent[v]);
+}
+
+void Union(int a, int b){
+    a=find(a);
+    b=find(b);
+    if(a!=b){
+        if(Size[a]<Size[b]) swap(a,b);
+        parent[b] = a;
+        Size[a]+=Size[b];
+    }
+}
+
+void solve(){
+    int n;
+    cin >> n;
+    vector<pair<int,int>> cities(n+1);
+    fi(i,1,n+1){
+        make(i);
+        int x,y;
+        cin >> x >> y;
+        cities[i] = {x,y};
+    }
+    vector<int> c(n+1), k(n+1);
+    fi(i,1,n+1) cin >> c[i];
+    fi(i,1,n+1) cin >> k[i];
+    vector<pair<lil,pair<int,int>>> edges;
+    fi(i,1,n+1){
+        edges.push_back({c[i], {0,i}});
+    }
+    fi(i,1,n+1){
+        fi(j,i+1,n+1){
+            lil x = cities[i].first - cities[j].first;
+            lil y = cities[i].second - cities[j].second;
+            edges.push_back({(abs(x)+abs(y))*(k[i]+k[j]), {i,j}});
+        }
+    }
+    vector<lil> stations;
+    vector<pair<lil,lil>> connected;
+    sort(edges.begin(), edges.end());
+    lil cost=0;
+    for(auto edge: edges){
+        lil wt = edge.first;
+        lil a = edge.second.first;
+        lil b = edge.second.second;
+        // cout(wt << " " << a << " " << b);
+        if(find(a)==find(b)) continue;
+        Union(a,b);
+        cost+=wt;
+        if(a==0 || b==0) stations.push_back(a+b);
+        else connected.push_back({a,b});
+    }
+    cout(cost);
+    cout(stations.size());
+    for(auto i: stations) cout << i << " ";
+    cout << endl;
+    cout(connected.size());
+    for(auto i: connected) cout(i.first << " " << i.second);
+}
+int main() {
+        int t=1;
+        while(t--){
+            solve();
+        }
+}
