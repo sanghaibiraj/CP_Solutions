@@ -1,0 +1,61 @@
+// problem link: https://codeforces.com/contest/1374/problem/B
+// Problem Name: B. Multiply by 2, divide by 6
+// Contest Name: Codeforces Round 653
+// div: 3
+
+// Problem tags: math
+// difficulty: *900
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n;
+    cin >> n;
+    int c2=0, c3=0;
+    while(n%2==0){
+        n/=2;
+        c2++;
+    }
+    while(n%3==0){
+        n/=3;
+        c3++;
+    }
+    if(n>1 || c2>c3){
+        cout(-1);
+        return;
+    }
+    cout(c3+c3-c2);
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
