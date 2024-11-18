@@ -2,6 +2,7 @@
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
         "1948a": "c",
-        "1955a": "c"
+        "1955a": "c",
+        "iostream": "cpp"
     }
 }
