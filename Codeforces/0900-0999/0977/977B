@@ -1,0 +1,66 @@
+// problem link: https://codeforces.com/contest/977/problem/B
+// Problem Name: B. Two-gram
+// Contest Name: Codeforces Round 479
+// Div. 3
+
+// Problem tags: implementation, strings
+// difficulty: *900
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    int n;
+    string s;
+    cin >> n >> s;
+    map<string, int> mp;
+    string t;
+    t += s[0];
+    fi(i,1,n){
+        t+=s[i];
+        mp[t]++;
+        t="";
+        t+=s[i];
+    }     
+    int mx=0;
+    for(auto it: mp){
+        mx = max(mx, it.second);
+    }
+    for(auto it: mp){
+        if(mx==it.second){
+            cout(it.first);
+            break;
+        }
+    }
+}
+int main() {
+        int t=1;
+        while(t--){
+            solve();
+        }
+}
