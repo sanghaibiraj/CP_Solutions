@@ -1,0 +1,96 @@
+// problem link: https://codeforces.com/contest/33/problem/B
+// Problem Name: B. String Problem
+// Contest Name: Codeforces Beta Round 33
+// Div 2
+
+// Problem tags: shortest paths
+// difficulty: *1800
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    string s,d;
+    int n;
+    cin >> s >> d >> n;
+    int dist[26][26];
+    fi(i,0,26){
+        fi(j,0,26){
+            if(i==j) dist[i][j]=0;
+            else dist[i][j]=5000;
+        }
+    }
+    fi(i,0,n){
+        char a,b;
+        int w;
+        cin >> a >> b >> w;
+        if(dist[a-'a'][b-'a']>w) dist[a-'a'][b-'a']=w;
+    }
+    fi(k,0,26){
+        fi(i,0,26){
+            fi(j,0,26){
+                dist[i][j]=min(dist[i][j], dist[i][k]+dist[k][j]);
+            }
+        }
+    }
+    if(s.length()!=d.length()){
+        cout(-1);
+        return;
+    }
+    int ans=0;
+    string sans="";
+    fi(i,0,s.length()){
+        if(s[i]==d[i]) sans+=s[i];
+        else{
+            int mn = 5000;
+            char ch;
+            fi(j,0,26){
+                if(dist[s[i]-'a'][j]+dist[d[i]-'a'][j]<mn){
+                    mn = dist[s[i]-'a'][j]+dist[d[i]-'a'][j];
+                    ch = j+'a';
+                }
+            }
+            if(mn<5000){
+                ans+=mn;
+                sans+=ch;
+            }
+            else{
+                cout(-1);
+                return;
+            }
+        }
+    }
+    cout(ans);
+    cout(sans);
+}
+int main() {
+        int t=1;
+        while(t--){
+            solve();
+        }
+}

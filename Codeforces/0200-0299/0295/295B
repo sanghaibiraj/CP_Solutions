@@ -1,0 +1,74 @@
+// problem link: https://codeforces.com/contest/295/problem/B
+// Problem Name: B. Greg and Graph
+// Contest Name: Codeforces Round 179
+// Div: 1
+
+// Problem tags: dp, graphs, shortest paths
+// difficulty: *1700
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n;
+    cin >> n;
+    lil dist[n+1][n+1];
+    fi(i,1,n+1){
+        fi(j,1,n+1){
+            cin >> dist[i][j];
+        }
+    }
+    vector<lil> del(n);
+    vector<lil> ans;
+    ain(i,del,n);
+    reverse(del.begin(), del.end());
+    fi(k,0,n){
+        lil v = del[k];
+        fi(i,1,n+1){
+            fi(j,1,n+1){
+                dist[i][j] = min(dist[i][j], dist[i][v]+dist[v][j]);
+            }
+        }
+        lil sum=0;
+        fi(i,0,k+1){
+            fi(j,0,k+1){
+                sum += dist[del[i]][del[j]];
+            }
+        }
+        ans.push_back(sum);
+    }
+    reverse(ans.begin(), ans.end());
+    for(auto it: ans) cout << it << " ";
+    cout << endl;
+}
+int main() {
+        int t=1;
+        while(t--){
+            solve();
+        }
+}
