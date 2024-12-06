@@ -37,7 +37,7 @@ int gcd(int a,int b){
 void solve(){
     lil n;
     cin >> n;
-    lil c=0;
+    lil c = 0;
     while(n>0){
         if(n%10==7 || n%10==4) c++;
         n/=10;
