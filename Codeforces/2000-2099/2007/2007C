@@ -1,0 +1,73 @@
+// problem link: https://codeforces.com/contest/2007/problem/C
+// Problem Name: C. Dora and C++
+// Contest Name: Codeforces Round 969
+// Div. 2
+
+// Problem tags:  math, number theory 
+// difficulty: *1500
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n,a,b;
+    cin >> n >> a >> b;
+    vector<lil> c(n);
+    ain(i,c,n);
+    lil x = __gcd(a,b);
+    sort(c.begin(), c.end());
+    lil ans=0, ans2 = 0;
+    fi(i,0,n-1){
+        lil y = ((c.back()-c[i])/x);
+        // lil z = abs(c.back()-(c[i]+(x*y)));
+        // // z = min(ans,abs(c.back()-y+x));
+        // ans = max(ans,z);
+        c[i]=c[i]+(x*y);
+    }
+    sort(c.begin(),c.end());
+    ans = c.back()-c[0];
+    fi(i,0,n-1){
+        c[i]+=x;
+        ans = min(ans,c[i]-c[i+1]);
+    }
+    cout(ans);
+    // fi(i,0,n-1){
+    //     lil y = ((c.back()-c[i])/x);
+    //     lil z = abs(c.back()-(c[i]+(x*y+x)));
+    //     // z = min(ans,abs(c.back()-y+x));
+    //     ans2 = max(ans2,z);
+    // }
+    // cout(min(ans, ans2));
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}

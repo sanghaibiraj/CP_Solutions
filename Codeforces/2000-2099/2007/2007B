@@ -1,0 +1,64 @@
+// problem link: https://codeforces.com/contest/2007/problem/B
+// Problem Name: B. Index and Maximum Value
+// Contest Name: Codeforces Round 969
+// Div. 2
+
+// Problem tags: data structures, greedy 
+// difficulty: *900
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(int i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n,m;
+    cin >> n >> m;
+    vector<lil> v(n);
+    ain(i,v,n);
+    lil mx=0;
+    fi(i,0,n) mx = max(mx,v[i]);
+    fi(i,0,m){
+        char ch;
+        int x,y;
+        cin >> ch >> x >> y;
+        if(ch=='+'){
+            if(mx>=x && mx<=y) mx++;
+        }
+        else{
+            if(mx>=x && mx<=y) mx--;
+        }
+        cout << mx << " ";
+    }
+    cout << endl;
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
