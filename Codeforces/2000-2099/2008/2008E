@@ -1,0 +1,99 @@
+// problem link: https://codeforces.com/contest/2008/problem/E
+// Problem Name: E. Alternating String
+// Contest Name: Codeforces Round 970
+// Div. 3
+
+// Problem tags: brute force, data structures, dp, greedy, implementation, strings 
+// difficulty: *1500
+
+// Solution:
+
+/* <________--BIRAJ01--________> */
+
+#include <bits/stdc++.h>
+#include <iostream>
+
+#define lil long long int
+
+#define couty cout << "YES" << endl
+#define coutn cout << "NO" << endl
+#define cout(a) cout << a << endl
+
+#define min3(a,b,c) (a<b && a<c)?a:(b<c)?b:c
+#define max3(a,b,c) (a>b && a>c)?a:(b>c)?b:c
+
+#define fi(i,s,e) for(lil i=s;i<e;i++)
+#define fd(i,s,e) for(int i=s;i>e;i--)
+
+#define ain(i,arr,n); for(int i=0;i<n;i++){ cin >> arr[i]; }
+#define aout(i,arr,n); for(int i=0;i<n;i++){ cout << arr[i] << "\t"; }
+
+using namespace std;
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);  }
+
+void solve(){
+    lil n; string s;
+    cin >> n >> s;
+    if(n==1){
+        cout(1);
+        return;
+    }
+    if(n%2==0){
+        map<char, lil> even;
+        map<char, lil> odd;
+        fi(i,0,n){
+            if(i%2==0) even[s[i]]++;
+            else odd[s[i]]++;
+        }
+        lil mx_even=0, mx_odd=0;
+        for(auto it: even) mx_even = max(mx_even, it.second);
+        for(auto it: odd) mx_odd = max(mx_odd, it.second);
+        cout(n/2-mx_even+n/2-mx_odd);
+        return;
+    }
+    map<char, lil> even;
+    map<char, lil> odd;
+    fi(i,0,n-1){
+        if(i%2==0) even[s[i]]++;
+        else odd[s[i]]++;
+    }
+    lil mx_even=0, mx_odd=0;
+    for(auto it: even) mx_even = max(mx_even, it.second);
+    for(auto it: odd) mx_odd = max(mx_odd, it.second);
+    lil a = n/2-mx_even+n/2-mx_odd;
+    map<char, lil> even2;
+    map<char, lil> odd2;
+    fd(i,n-2,-1){
+        if(i%2==0){
+            even[s[i]]--;
+            even2[s[i+1]]++;
+        }
+        else{
+            odd[s[i]]--;
+            odd2[s[i+1]]++;
+        }
+        map<char, lil> even3=even2;
+        map<char, lil> odd3=odd2;
+        for(auto it: even){
+            even3[it.first] += it.second;
+        }
+        for(auto it: odd){
+            odd3[it.first] += it.second;
+        }
+        lil mx_even2=0, mx_odd2=0;
+        for(auto it: even3) mx_even2 = max(mx_even2, it.second);
+        for(auto it: odd3) mx_odd2 = max(mx_odd2, it.second);
+        a = min(a,n/2-mx_even2+n/2-mx_odd2);
+    }
+    cout(a+1);
+}
+int main() {
+        int t;
+        cin >> t;
+        while(t--){
+            solve();
+        }
+}
